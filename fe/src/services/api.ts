@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios';
+import axios from 'axios';
 import {
     Project, Employee,
     CreateProjectDto, CreateEmployeeDto,
@@ -6,8 +6,8 @@ import {
 } from '../types/models';
 import { HelloResponse } from '../types';
 
-const api: AxiosInstance = axios.create({
-  baseURL: '/api',
+const api = axios.create({
+  baseURL: 'http://localhost:8000/api',
 });
 
 // Hello endpoint

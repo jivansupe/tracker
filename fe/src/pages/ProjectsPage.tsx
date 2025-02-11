@@ -22,11 +22,11 @@ import {
   Edit as EditIcon,
   Delete as DeleteIcon,
 } from '@mui/icons-material';
-import { ProjectForm } from '@/components/ProjectForm';
-import { CreateProjectDto, Project, ProjectStatus } from '@/types/models';
+import { ProjectForm } from '../components/ProjectForm';
+import { CreateProjectDto, Project, ProjectStatus } from '../types/models';
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { fetchProjects, addProject } from '@/store/slices/projectSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { fetchProjects, addProject } from '../store/slices/projectSlice';
 
 export const ProjectsPage: React.FC = () => {
   const dispatch = useAppDispatch();

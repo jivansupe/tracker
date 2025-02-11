@@ -17,7 +17,7 @@ This project consists of a React frontend with TypeScript and a FastAPI backend.
 cd be
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
-.\venv\Scripts\activate   # Windows
+./venv/Scripts/activate   # Windows
 ```
 
 2. Install dependencies:

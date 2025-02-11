@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
 import { Employee, CreateEmployeeDto } from '../../types/models';
 import { getEmployees, createEmployee } from '../../services/api';
 
@@ -17,16 +16,12 @@ const initialState: EmployeeState = {
 
 export const fetchEmployees = createAsyncThunk(
   'employees/fetchAll',
-  async () => {
-    return await getEmployees();
-  }
+  async () => await getEmployees()
 );
 
 export const addEmployee = createAsyncThunk(
   'employees/add',
-  async (employee: CreateEmployeeDto) => {
-    return await createEmployee(employee);
-  }
+  async (employee: CreateEmployeeDto) => await createEmployee(employee)
 );
 
 const employeeSlice = createSlice({

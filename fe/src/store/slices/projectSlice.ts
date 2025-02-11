@@ -17,16 +17,12 @@ const initialState: ProjectState = {
 
 export const fetchProjects = createAsyncThunk(
   'projects/fetchAll',
-  async () => {
-    return await getProjects();
-  }
+  async () => await getProjects()
 );
 
 export const addProject = createAsyncThunk(
   'projects/add',
-  async (project: CreateProjectDto) => {
-    return await createProject(project);
-  }
+  async (project: CreateProjectDto) => await createProject(project)
 );
 
 const projectSlice = createSlice({

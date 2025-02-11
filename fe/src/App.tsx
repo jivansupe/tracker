@@ -9,7 +9,7 @@ import { ProjectsPage } from './pages/ProjectsPage';
 import { EmployeesPage } from './pages/EmployeesPage';
 import './App.css';
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { store } from './store/store';
 
 const theme = createTheme({
   palette: {
