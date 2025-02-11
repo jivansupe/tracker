@@ -1,0 +1,26 @@
+.dashboard {
+  &-stats {
+    margin-bottom: map-get($spacing, 4);
+
+    .stat-card {
+      padding: map-get($spacing, 2);
+      @include flex-between;
+
+      .icon-wrapper {
+        padding: map-get($spacing, 1.5);
+        border-radius: map-get($spacing, 1);
+      }
+    }
+  }
+
+  &-progress {
+    .progress-item {
+      margin-bottom: map-get($spacing, 3);
+
+      .progress-header {
+        @include flex-between;
+        margin-bottom: map-get($spacing, 1);
+      }
+    }
+  }
+} 

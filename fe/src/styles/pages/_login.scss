@@ -1,0 +1,20 @@
+.login-page {
+  @include flex-center;
+  min-height: 100vh;
+  background-color: var(--mui-palette-background-default);
+
+  .login-form {
+    width: 100%;
+    max-width: 400px;
+    padding: map-get($spacing, 4);
+    margin-top: map-get($spacing, 8);
+
+    .MuiTextField-root {
+      margin-bottom: map-get($spacing, 2);
+    }
+
+    .submit-button {
+      margin-top: map-get($spacing, 3);
+    }
+  }
+} 

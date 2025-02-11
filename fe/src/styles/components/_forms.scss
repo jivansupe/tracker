@@ -1,0 +1,8 @@
+.form-group {
+  margin-bottom: map-get($spacing, 2);
+}
+
+.form-control {
+  width: 100%;
+  padding: map-get($spacing, 1);
+} 

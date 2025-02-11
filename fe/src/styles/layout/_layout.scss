@@ -1,0 +1,22 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  &-content {
+    display: flex;
+    flex: 1;
+    margin-top: $header-height;
+  }
+
+  .main-content {
+    flex: 1;
+    padding: map-get($spacing, 3);
+    background-color: var(--mui-palette-background-default);
+
+    @include respond-to(sm) {
+      width: calc(100% - #{$sidebar-width});
+      margin-left: $sidebar-width;
+    }
+  }
+} 

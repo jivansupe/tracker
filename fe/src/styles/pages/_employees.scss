@@ -1,0 +1,6 @@
+.employees-page {
+  .employee-header {
+    @include flex-between;
+    margin-bottom: map-get($spacing, 3);
+  }
+} 

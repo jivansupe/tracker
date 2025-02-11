@@ -1,0 +1,22 @@
+// Breakpoints
+$breakpoints: (
+  xs: 0,
+  sm: 600px,
+  md: 960px,
+  lg: 1280px,
+  xl: 1920px
+);
+
+// Spacing
+$spacing-unit: 8px;
+$spacing: (
+  1: $spacing-unit,
+  2: $spacing-unit * 2,
+  3: $spacing-unit * 3,
+  4: $spacing-unit * 4,
+  5: $spacing-unit * 5
+);
+
+// Layout
+$sidebar-width: 240px;
+$header-height: 64px; 

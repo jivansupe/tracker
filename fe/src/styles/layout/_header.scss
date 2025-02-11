@@ -1,0 +1,22 @@
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: var(--mui-zIndex-drawer + 1);
+
+  &-logo {
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: var(--mui-palette-primary-contrastText);
+    }
+  }
+
+  .menu-button {
+    margin-right: map-get($spacing, 2);
+    
+    @include respond-to(sm) {
+      display: none;
+    }
+  }
+} 

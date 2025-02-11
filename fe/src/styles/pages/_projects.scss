@@ -1,0 +1,6 @@
+.projects-page {
+  .project-header {
+    @include flex-between;
+    margin-bottom: map-get($spacing, 3);
+  }
+} 

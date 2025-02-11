@@ -1,0 +1,22 @@
+.sidebar {
+  width: $sidebar-width;
+  flex-shrink: 0;
+
+  .MuiDrawer-paper {
+    width: $sidebar-width;
+    box-sizing: border-box;
+    background-color: var(--mui-palette-background-paper);
+  }
+
+  &-nav {
+    padding: map-get($spacing, 2) 0;
+
+    .MuiListItem-root {
+      padding: map-get($spacing, 1) map-get($spacing, 2);
+
+      &.active {
+        background-color: var(--mui-palette-action-selected);
+      }
+    }
+  }
+} 

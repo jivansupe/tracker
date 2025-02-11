@@ -1,0 +1,23 @@
+// Abstracts
+@import './abstracts/variables';
+@import './abstracts/mixins';
+
+// Themes
+@import './themes/palette';
+@import './themes/typography';
+
+// Layout
+@import './layout/header';
+@import './layout/sidebar';
+@import './layout/layout';
+
+// Pages
+@import './pages/login';
+@import './pages/dashboard';
+@import './pages/projects';
+@import './pages/employees';
+
+// Components
+@import './components/forms';
+@import './components/tables';
+@import './components/buttons'; 
