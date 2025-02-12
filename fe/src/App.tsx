@@ -1,12 +1,18 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
-import { MainLayout } from './components/Layout/MainLayout';
-import { DashboardPage } from './pages/DashboardPage';
-import { ProjectsPage } from './pages/ProjectsPage';
-import { EmployeesPage } from './pages/EmployeesPage';
+import { Layout } from './components/layout/Layout';
+import { AuthProvider } from './context/AuthContext';
+import {
+  DashboardPage,
+  ProjectsPage,
+  EmployeesPage,
+  DailyRecordPage
+} from './pages';
 
 const theme = createTheme({
   palette: {
@@ -43,18 +49,23 @@ const theme = createTheme({
 function App() {
   return (
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <Router>
-          <MainLayout>
-            <Routes>
-              <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/projects" element={<ProjectsPage />} />
-              <Route path="/employees" element={<EmployeesPage />} />
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            </Routes>
-          </MainLayout>
-        </Router>
-      </ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider theme={theme}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Router>
+              <Layout>
+                <Routes>
+                  <Route path="/dashboard" element={<DashboardPage />} />
+                  <Route path="/projects" element={<ProjectsPage />} />
+                  <Route path="/employees" element={<EmployeesPage />} />
+                  <Route path="/daily-records" element={<DailyRecordPage />} />
+                  <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                </Routes>
+              </Layout>
+            </Router>
+          </LocalizationProvider>
+        </ThemeProvider>
+      </AuthProvider>
     </Provider>
   );
 }

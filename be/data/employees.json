@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "first_name": "Jivan",
+    "last_name": "Supe",
+    "email": "jivan.supe@indexnine.com",
+    "role": "ENGINEER",
+    "department": "Engineering",
+    "joining_date": "2016-02-01"
+  }
+]

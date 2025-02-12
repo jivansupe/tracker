@@ -1,7 +1,6 @@
-import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material';
-import { Menu as MenuIcon, Logout as LogoutIcon } from '@mui/icons-material';
+import React from 'react';
+import { AppBar, Toolbar, IconButton, Typography } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import { useAuth } from '../../context/AuthContext';
 
 interface HeaderProps {
@@ -9,35 +8,23 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
-  const { logout } = useAuth();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
+  const { user } = useAuth();
 
   return (
-    <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+    <AppBar position="fixed">
       <Toolbar>
         <IconButton
           color="inherit"
+          aria-label="open drawer"
           edge="start"
           onClick={onMenuClick}
           sx={{ mr: 2, display: { sm: 'none' } }}
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Manager Dashboard
+        <Typography variant="h6" noWrap component="div">
+          Project Tracker
         </Typography>
-        <Button
-          color="inherit"
-          onClick={handleLogout}
-          startIcon={<LogoutIcon />}
-        >
-          Logout
-        </Button>
       </Toolbar>
     </AppBar>
   );

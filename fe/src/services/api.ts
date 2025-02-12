@@ -7,8 +7,14 @@ import {
 import { HelloResponse } from '../types';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000/api',
+    baseURL: 'http://127.0.0.1:8000/api/v1',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    withCredentials: true  // Important for CORS with credentials
 });
+
+export default api;
 
 // Hello endpoint
 export const getHello = async (): Promise<HelloResponse> => {
@@ -50,5 +56,21 @@ export const getEmployees = async (): Promise<Employee[]> => {
 
 export const getEmployee = async (id: number): Promise<Employee> => {
   const response = await api.get<Employee>(`/employees/${id}`);
+  return response.data;
+};
+
+// Daily Record APIs
+export const createDailyRecord = async (record: CreateDailyRecordDto): Promise<DailyRecord> => {
+  const response = await api.post<DailyRecord>('/daily-records', record);
+  return response.data;
+};
+
+export const getEmployeeDailyRecords = async (employeeId: number): Promise<DailyRecord[]> => {
+  const response = await api.get<DailyRecord[]>(`/daily-records/employee/${employeeId}`);
+  return response.data;
+};
+
+export const getEmployeeDailyRecordsByDate = async (employeeId: number, date: string): Promise<DailyRecord[]> => {
+  const response = await api.get<DailyRecord[]>(`/daily-records/employee/${employeeId}/date/${date}`);
   return response.data;
 }; 

@@ -13,6 +13,13 @@ export enum EmployeeRole {
     MANAGER = "MANAGER"
 }
 
+export enum TaskStatus {
+    COMPLETED = "COMPLETED",
+    IN_PROGRESS = "IN_PROGRESS",
+    BLOCKED = "BLOCKED",
+    NOT_STARTED = "NOT_STARTED"
+}
+
 // Base Interfaces
 export interface ProjectBase {
     name: string;
@@ -76,4 +83,17 @@ export interface PaginatedResponse<T> {
     total: number;
     page: number;
     size: number;
-} 
+}
+
+export interface DailyRecord {
+    id?: number;
+    employee_id: number;
+    date: string;
+    project_id: number;
+    hours_worked: number;
+    tasks_completed: string;
+    status: TaskStatus;
+    notes?: string;
+}
+
+export interface CreateDailyRecordDto extends Omit<DailyRecord, 'id'> {} 

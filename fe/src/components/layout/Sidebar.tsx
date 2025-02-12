@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import {
   Drawer,
   List,
@@ -8,13 +8,13 @@ import {
   ListItemText,
   Box,
   Toolbar,
+  useTheme,
 } from '@mui/material';
 import {
   Dashboard as DashboardIcon,
-  Work as ProjectIcon,
+  Folder as FolderIcon,
   People as EmployeeIcon,
-  Feedback as FeedbackIcon,
-  Update as UpdateIcon,
+  Assignment as AssignmentIcon,
 } from '@mui/icons-material';
 
 interface SidebarProps {
@@ -26,15 +26,15 @@ const drawerWidth = 240;
 
 const menuItems = [
   { text: 'Dashboard', path: '/dashboard', icon: <DashboardIcon /> },
-  { text: 'Projects', path: '/projects', icon: <ProjectIcon /> },
+  { text: 'Projects', path: '/projects', icon: <FolderIcon /> },
   { text: 'Employees', path: '/employees', icon: <EmployeeIcon /> },
-  { text: 'Feedback', path: '/feedback', icon: <FeedbackIcon /> },
-  { text: 'Daily Updates', path: '/updates', icon: <UpdateIcon /> },
+  { text: 'Daily Records', path: '/daily-records', icon: <AssignmentIcon /> },
 ];
 
 export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onClose }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const theme = useTheme();
 
   const drawer = (
     <>
@@ -42,12 +42,24 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onClose }) => {
       <List>
         {menuItems.map((item) => (
           <ListItem
-            button
             key={item.text}
-            onClick={() => navigate(item.path)}
+            component={Link}
+            to={item.path}
             selected={location.pathname === item.path}
+            sx={{
+              color: 'inherit',
+              textDecoration: 'none',
+              '&.Mui-selected': {
+                backgroundColor: theme.palette.action.selected,
+              },
+              '&:hover': {
+                backgroundColor: theme.palette.action.hover,
+              },
+            }}
           >
-            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemIcon sx={{ color: location.pathname === item.path ? theme.palette.primary.main : 'inherit' }}>
+              {item.icon}
+            </ListItemIcon>
             <ListItemText primary={item.text} />
           </ListItem>
         ))}
@@ -78,7 +90,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onClose }) => {
         variant="permanent"
         sx={{
           display: { xs: 'none', sm: 'block' },
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
+            width: drawerWidth,
+            backgroundColor: theme.palette.background.paper,
+            borderRight: `1px solid ${theme.palette.divider}`,
+          },
         }}
         open
       >

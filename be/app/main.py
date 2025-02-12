@@ -1,19 +1,29 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy.orm import Session
-from datetime import datetime, timedelta
-from typing import List, Annotated
-from fastapi.security import OAuth2PasswordRequestForm
-from fastapi import status
+from .config import settings
+from .api.v1 import projects, employees, daily_records
 
-from app.models import (
-    Project, Employee,
-    ProjectCreate, EmployeeCreate,
-    ProjectUpdate, EmployeeUpdate,
-    Token, UserCreate, User
+app = FastAPI(
+    title=settings.PROJECT_NAME,
+    openapi_url=f"{settings.API_V1_STR}/openapi.json"
 )
-from app.database.base import get_db
-from app.database.repository import ProjectRepository, EmployeeRepository, UserRepository
-from app.auth import create_access_token, get_current_user
 
-# ... rest of the file 
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # Vite's default port
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=600,
+)
+
+# Include API routers
+app.include_router(projects.router, prefix=settings.API_V1_STR)
+app.include_router(employees.router, prefix=settings.API_V1_STR)
+app.include_router(daily_records.router, prefix=settings.API_V1_STR)
+
+@app.get("/")
+async def root():
+    return {"message": "Welcome to Project Tracker API"} 
