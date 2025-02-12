@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Box, Toolbar } from '@mui/material';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
@@ -15,15 +15,20 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="layout">
+    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
       <Header onMenuClick={handleDrawerToggle} />
-      <div className="layout-content">
-        <Sidebar mobileOpen={mobileOpen} onClose={handleDrawerToggle} />
-        <main className="main-content">
-          <Toolbar />
-          {children}
-        </main>
-      </div>
-    </div>
+      <Sidebar mobileOpen={mobileOpen} onClose={handleDrawerToggle} />
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: { sm: `calc(100% - 280px)` },
+          mt: '64px', // Height of the header
+        }}
+      >
+        {children}
+      </Box>
+    </Box>
   );
 }; 

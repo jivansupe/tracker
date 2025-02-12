@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { Layout } from './components/layout/Layout';
 import { AuthProvider } from './context/AuthContext';
+import { ProtectedRoute } from './components/auth/ProtectedRoute';
+import { LoginPage } from './pages/LoginPage';
 import {
   DashboardPage,
   ProjectsPage,
@@ -53,15 +55,25 @@ function App() {
         <ThemeProvider theme={theme}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Router>
-              <Layout>
-                <Routes>
-                  <Route path="/dashboard" element={<DashboardPage />} />
-                  <Route path="/projects" element={<ProjectsPage />} />
-                  <Route path="/employees" element={<EmployeesPage />} />
-                  <Route path="/daily-records" element={<DailyRecordPage />} />
-                  <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                </Routes>
-              </Layout>
+              <Routes>
+                <Route path="/login" element={<LoginPage />} />
+                <Route
+                  path="/*"
+                  element={
+                    <ProtectedRoute>
+                      <Layout>
+                        <Routes>
+                          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                          <Route path="/dashboard" element={<DashboardPage />} />
+                          <Route path="/projects" element={<ProjectsPage />} />
+                          <Route path="/employees" element={<EmployeesPage />} />
+                          <Route path="/daily-records" element={<DailyRecordPage />} />
+                        </Routes>
+                      </Layout>
+                    </ProtectedRoute>
+                  }
+                />
+              </Routes>
             </Router>
           </LocalizationProvider>
         </ThemeProvider>

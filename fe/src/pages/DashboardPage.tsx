@@ -1,14 +1,5 @@
-import * as React from 'react';
-import {
-  Grid,
-  Paper,
-  Typography,
-  Card,
-  CardContent,
-  Box,
-  Stack,
-  LinearProgress,
-} from '@mui/material';
+import React from 'react';
+import { Box, Typography, Card, LinearProgress } from '@mui/material';
 import {
   People as PeopleIcon,
   Work as WorkIcon,
@@ -16,98 +7,109 @@ import {
   TrendingUp as TrendingUpIcon,
 } from '@mui/icons-material';
 
+const statsCards = [
+  {
+    title: 'Users',
+    value: '14k',
+    change: '+25%',
+    period: 'Last 30 days',
+    trend: 'up',
+    icon: <PeopleIcon />,
+  },
+  {
+    title: 'Active Projects',
+    value: '325',
+    change: '-25%',
+    period: 'Last 30 days',
+    trend: 'down',
+    icon: <WorkIcon />,
+  },
+  {
+    title: 'Pending Tasks',
+    value: '200k',
+    change: '+5%',
+    period: 'Last 30 days',
+    trend: 'up',
+    icon: <TaskIcon />,
+  },
+  {
+    title: 'Completed Tasks',
+    value: '45',
+    change: '+8%',
+    period: 'Last 30 days',
+    trend: 'up',
+    icon: <TrendingUpIcon />,
+  },
+];
+
+const projects = [
+  { name: 'Project A', progress: 70, color: '#2196f3' },
+  { name: 'Project B', progress: 45, color: '#4caf50' },
+  { name: 'Project C', progress: 90, color: '#ff9800' },
+];
+
 export const DashboardPage: React.FC = () => {
-  // Mock data - replace with real data later
-  const stats = [
-    { title: 'Total Employees', value: '24', icon: <PeopleIcon />, color: '#1976d2' },
-    { title: 'Active Projects', value: '7', icon: <WorkIcon />, color: '#2e7d32' },
-    { title: 'Pending Tasks', value: '13', icon: <TaskIcon />, color: '#ed6c02' },
-    { title: 'Completed Tasks', value: '45', icon: <TrendingUpIcon />, color: '#9c27b0' },
-  ];
-
-  const projects = [
-    { name: 'Project A', progress: 70, color: '#1976d2' },
-    { name: 'Project B', progress: 45, color: '#2e7d32' },
-    { name: 'Project C', progress: 90, color: '#ed6c02' },
-  ];
-
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Typography variant="h4" gutterBottom>
-        Dashboard
-      </Typography>
+    <Box>
+      <Box>
+        <Typography variant="h5">
+          Dashboard
+        </Typography>
+        <Typography variant="body2">
+          Overview
+        </Typography>
+      </Box>
 
-      {/* Stats Cards */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
-        {stats.map((stat) => (
-          <Grid item xs={12} sm={6} md={3} key={stat.title}>
-            <Paper
-              sx={{
-                p: 2,
-                display: 'flex',
-                alignItems: 'center',
-                gap: 2,
-              }}
-              elevation={2}
-            >
-              <Box
-                sx={{
-                  p: 1.5,
-                  borderRadius: 2,
-                  backgroundColor: `${stat.color}15`,
-                  color: stat.color,
-                }}
-              >
-                {stat.icon}
-              </Box>
+      <Box>
+        {statsCards.map((stat) => (
+          <Card key={stat.title}>
+            <Box>
               <Box>
-                <Typography variant="h6" component="div">
-                  {stat.value}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2">
                   {stat.title}
                 </Typography>
+                <Typography variant="h4">
+                  {stat.value}
+                </Typography>
               </Box>
-            </Paper>
-          </Grid>
+              <Box>
+                {stat.icon}
+              </Box>
+            </Box>
+            <Box>
+              <Typography variant="body2">
+                {stat.change}
+              </Typography>
+              <Typography variant="body2">
+                {stat.period}
+              </Typography>
+            </Box>
+          </Card>
         ))}
-      </Grid>
+      </Box>
 
-      {/* Project Progress */}
-      <Card sx={{ mb: 4 }}>
-        <CardContent>
-          <Typography variant="h6" gutterBottom>
-            Project Progress
-          </Typography>
-          <Stack spacing={3}>
-            {projects.map((project) => (
-              <Box key={project.name}>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    mb: 1,
-                  }}
-                >
-                  <Typography variant="body2">{project.name}</Typography>
-                  <Typography variant="body2">{project.progress}%</Typography>
-                </Box>
-                <LinearProgress
-                  variant="determinate"
-                  value={project.progress}
-                  sx={{
-                    height: 8,
-                    borderRadius: 4,
-                    backgroundColor: `${project.color}20`,
-                    '& .MuiLinearProgress-bar': {
-                      backgroundColor: project.color,
-                    },
-                  }}
-                />
+      <Card>
+        <Typography variant="h6">
+          Project Progress
+        </Typography>
+        <Box>
+          {projects.map((project) => (
+            <Box key={project.name}>
+              <Box>
+                <Typography variant="body1">
+                  {project.name}
+                </Typography>
+                <Typography variant="body2">
+                  {project.progress}%
+                </Typography>
               </Box>
-            ))}
-          </Stack>
-        </CardContent>
+              <LinearProgress
+                variant="determinate"
+                value={project.progress}
+              />
+            </Box>
+          ))}
+        </Box>
       </Card>
     </Box>
   );
