@@ -1,4 +1,7 @@
 import * as React from 'react';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { fetchProjects, addProject } from '../store/slices/projectSlice';
 import {
   Box,
   Typography,
@@ -14,8 +17,6 @@ import {
   IconButton,
   Dialog,
   DialogTitle,
-  CircularProgress,
-  Alert,
 } from '@mui/material';
 import {
   Add as AddIcon,
@@ -24,9 +25,6 @@ import {
 } from '@mui/icons-material';
 import { ProjectForm } from '../components/ProjectForm';
 import { CreateProjectDto, Project, ProjectStatus } from '../types/models';
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { fetchProjects, addProject } from '../store/slices/projectSlice';
 
 export const ProjectsPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -61,32 +59,20 @@ export const ProjectsPage: React.FC = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-        <CircularProgress />
-      </Box>
-    );
-  }
-
   return (
-    <Box>
+    <Box sx={{ p: 3 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
-        <Typography variant="h4">Projects</Typography>
+        <Typography variant="h4" component="h1">
+          Projects
+        </Typography>
         <Button
           variant="contained"
           startIcon={<AddIcon />}
           onClick={() => setOpen(true)}
         >
-          New Project
+          Add Project
         </Button>
       </Box>
-
-      {error && (
-        <Alert severity="error" sx={{ mb: 3 }}>
-          {error}
-        </Alert>
-      )}
 
       <TableContainer component={Paper}>
         <Table>
