@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr
 from datetime import date
+from typing import Optional, List
 from ..models.employee import EmployeeRole
 
 class EmployeeBase(BaseModel):
@@ -13,8 +14,16 @@ class EmployeeBase(BaseModel):
 class EmployeeCreate(EmployeeBase):
     pass
 
-class Employee(EmployeeBase):
+class EmployeeResponse(EmployeeBase):
     id: int
+    projects: List[int] = []
 
     class Config:
-        from_attributes = True 
+        from_attributes = True
+
+class EmployeeUpdate(EmployeeBase):
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    email: Optional[EmailStr] = None
+    role: Optional[EmployeeRole] = None
+    department: Optional[str] = None 
